@@ -27,6 +27,7 @@
         onRowSelect         选中事件
         onRowUnselect       取消选中事件
     -->
+    <!-- 该页保留书页和简写，书页已注释方便理解阅读 -->
     <p-dataTable [value]="sales" sortField="Features" rowGroupMode="subheader" groupField="Features" [expandableRowGroups]="showModel" [sortableRowGroup]="true" [scrollable]="true" scrollHeight="450px" selectionMode="single" [(selection)]="selectedRow" (onRowSelect)="onRowSelect($event)"
         (onRowUnselect)="onRowUnselect($event)" [responsive]="true">
         <p-headerColumnGroup>
@@ -79,6 +80,13 @@
             </p-row>
         </p-footerColumnGroup>
     </p-dataTable>
+
+    <!-- 
+        弹出编辑框
+        需要在Model里引入 DialogModule，其次   ButtonModule,InputTextModule等修饰组件
+        以及 BrowserAnimationsModule NoopAnimationsModule from '@angular/platform-browser/animations' 的动画组件 
+        注意 <p-dialog></p-dialog> 是在 <p-dataTable></p-dataTable>的下面
+     -->
     <p-dialog [header]="selectTable" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="selectRowDetails">
             <ng-container *ngFor="let cell of fields;let i = index">
