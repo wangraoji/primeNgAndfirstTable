@@ -14,9 +14,9 @@
     + 4.2 如果右键翻译有些不是很妥，请前往 https://github.com/wangraoji/clonePrimengVersion 把它克隆/下载下来，  
     然后npm install ng serve 跑起来，翻译不妥的地方以中文注解！  
 
-5. 科普一下 &lt;custom data="data" &gt;&lt;/&gt>  和 &lt;custom [data]="data" &gt;&lt;/&gt>  的区别  
+5. 科普一下 &lt;custom data="data"&gt;custom;/&gt>  和 &lt;custom [data]="data" &gt;custom/&gt>  的区别  
   
-  + 5.1 1 表示在里面传入了1个'data'的字符串，2表示在Ts里面有这个data的东西传进去。比如 data: [1,2,3];
+  + 5.1   前者表示在里面传入了1个'data'的字符串，后者表示在Ts里面有这个data的东西传进去。比如 data: [1,2,3];
 
 
 
