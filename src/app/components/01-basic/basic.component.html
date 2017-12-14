@@ -1,0 +1,124 @@
+<div class="content-section implementation">
+    <!-- 右边消息提示框 需要在module引入 GrowlModule -->
+    <p-growl [value]="msgs"></p-growl>
+
+    <!-- button按钮 用了priemng ui样式组件 -->
+    <button icon="fa-list" label="切换展示模式" pbutton="" style="margin:5px 0;" type="button" ng-reflect-label="切换展示模式" ng-reflect-icon="fa-list" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" (click)="toggle()">
+        <span class="ui-button-icon-left ui-clickable fa fa-fw fa-list"></span>
+        <span class="ui-button-text ui-clickable">切换展示模式</span>
+    </button>
+    <button icon="fa-list" label="切换展示模式" pbutton="" style="margin:5px 0;" type="button" ng-reflect-label="切换展示模式" ng-reflect-icon="fa-list" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" (click)="toggleEdit()">
+        <span class="ui-button-icon-left ui-clickable fa fa-fw fa-list"></span>
+        <span class="ui-button-text ui-clickable">{{ showRowModel ? '开启单选弹出mes模式' : '开启单选弹出Edit模式'}}</span>
+    </button>
+    <span class='showRowModel'>{{ showRowModel ? '当前选中弹出编辑模式':'当前选中弹出mes模式' }}</span>
+    <!-- 
+        [value]             数据 
+        sortField           行分组标题排序
+        rowGroupMode        行分组的展示方式
+        groupField          行分组小标题  可以理解为以谁分标题分组，比如这里是以 功能名称 为 子标题分组
+        expandableRowGroups 启用后行分组有折叠展开的小图标
+        sortableRowGroup    是否开启单击小标题排序
+        scrollable          是否开启垂直/水平滚动
+        scrollHeight        垂直滚动的高度
+
+        selectionMode       开启选择模式
+        [{selection}]       选中的row
+        onRowSelect         选中事件
+        onRowUnselect       取消选中事件
+    -->
+    <p-dataTable [value]="sales" sortField="Features" rowGroupMode="subheader" groupField="Features" [expandableRowGroups]="showModel" [sortableRowGroup]="true" [scrollable]="true" scrollHeight="450px" selectionMode="single" [(selection)]="selectedRow" (onRowSelect)="onRowSelect($event)"
+        (onRowUnselect)="onRowUnselect($event)" [responsive]="true">
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column header="firstTable 和 primeNG部分功能对比" colspan="7"></p-column>
+            </p-row>
+
+            <p-row>
+                <!-- 
+                    <p-column header="表格"></p-column>
+                    <p-column header="支持"></p-column>
+                    <p-column header="操作视觉"></p-column>
+                    <p-column header="可操作性"></p-column>
+                    <p-column header="是否可配"></p-column>
+                    <p-column header="是否暴露事件"></p-column>
+                    <p-column header="描述"></p-column> 
+                -->
+                <p-column *ngFor="let cell of headers" [header]="cell"></p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <!-- 
+            pTemplate  模板装饰器，这里指定 行分组标题
+            rowData    指向每一行数据
+            rowData['Features'] = rowData.Features  等于数据里面的 Features  等于楼上 groupField
+        -->
+        <ng-template pTemplate="rowgroupheader" let-rowData>{{rowData['Features']}}</ng-template>
+        <!-- 
+            <p-column field="table"></p-column>
+            <p-column field="standBy"></p-column>
+            <p-column field="styleLv"></p-column>
+            <p-column field="Operability"></p-column>
+            <p-column field="isConfiguration"></p-column>
+            <p-column field="isOutputEvent"></p-column>
+            <p-column field="description"></p-column> 
+        -->
+        <p-column *ngFor="let cell of fields" [field]="cell"></p-column>
+
+        <p-footerColumnGroup>
+            <p-row>
+                <p-column footer="totals" colspan="7"></p-column>
+            </p-row>
+            <p-row>
+                <p-column footer="PriemNg"></p-column>
+                <p-column *ngFor="let cell of totals.PriemNg;let i = index" [footer]="i === 1 || i === 2 ? cell.desc + cell.totals + ' ★' : cell.desc + cell.totals"></p-column>
+            </p-row>
+            <p-row>
+                <p-column footer="firstTable"></p-column>
+                <p-column *ngFor="let cell of totals.firstTable;let i = index" [footer]="i === 1 || i === 2 ? cell.desc + cell.totals + ' ★' : cell.desc + cell.totals"></p-column>
+            </p-row>
+        </p-footerColumnGroup>
+    </p-dataTable>
+    <p-dialog [header]="selectTable" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="selectRowDetails">
+            <ng-container *ngFor="let cell of fields;let i = index">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"><label [for]="cell">{{ headers[i] }}</label></div>
+                    <div class="ui-grid-col-8"><input pInputText [id]="cell" [(ngModel)]="selectRowDetails[cell]" /></div>
+                </div>
+            </ng-container>
+            <!--  
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"><label for="standBy">支持</label></div>
+                    <div class="ui-grid-col-8"><input pInputText id="vin" [(ngModel)]="selectRowDetails.standBy" /></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"><label for="styleLv">操作视觉</label></div>
+                    <div class="ui-grid-col-8"><input pInputText id="vin" [(ngModel)]="selectRowDetails.styleLv" /></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"><label for="Operability">可操作性</label></div>
+                    <div class="ui-grid-col-8"><input pInputText id="vin" [(ngModel)]="selectRowDetails.Operability" /></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"><label for="isConfiguration">是否可配</label></div>
+                    <div class="ui-grid-col-8"><input pInputText id="vin" [(ngModel)]="selectRowDetails.isConfiguration" /></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"><label for="isOutputEvent">暴露事件</label></div>
+                    <div class="ui-grid-col-8"><input pInputText id="vin" [(ngModel)]="selectRowDetails.isOutputEvent" /></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"><label for="description">描述</label></div>
+                    <div class="ui-grid-col-8"><input pInputText id="vin" [(ngModel)]="selectRowDetails.description" /></div>
+                </div>
+            -->
+        </div>
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>
+                <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+</div>
