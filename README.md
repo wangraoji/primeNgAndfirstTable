@@ -16,7 +16,12 @@
 
 5. 科普一下 &lt;custom data="data"&gt;custom;/&gt>  和 &lt;custom [data]="data" &gt;custom/&gt>  的区别  
   
-  + 5.1   前者表示在里面传入了1个'data'的字符串，后者表示在Ts里面有这个data的东西传进去。比如 data: [1,2,3];
+    + 5.1   前者表示在里面传入了1个'data'的字符串，后者表示在Ts里面有这个data的东西传进去。比如 data: [1,2,3];
+
+6. primeNG Table控件支持自定义，所以主要配置在 HTML 文件里，https://github.com/wangraoji/primeNgAndfirstTable/blob/master/src/app/components/01-basic/basic.component.html  
+
+
+    ts主要实现逻辑。    
 
 
 
