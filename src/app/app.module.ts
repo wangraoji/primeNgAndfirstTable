@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
+import { PageComponent } from './components/page/page.component';
+
 import {
   DataTableModule,
   CalendarModule,
@@ -17,26 +20,12 @@ import {
   CodeHighlighterModule
 } from 'primeng/primeng';
 
-
-
-
-import { AppComponent } from './app.component';
-
-// 01-基本例子
-import { BasicComponent } from './components/01-basic/basic.component';
-
-
 import { CarService } from './components/carService';
-
-const EXAMPLE = [
-  // 01-基本例子
-  BasicComponent,
-];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ...EXAMPLE,
+    PageComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +45,7 @@ const EXAMPLE = [
     TabViewModule,
     CodeHighlighterModule
   ],
-  providers: [CarService],
+  providers: [ CarService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

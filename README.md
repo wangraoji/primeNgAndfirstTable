@@ -1,31 +1,27 @@
-# 关于primeNgAndfirstTable
+# Pf
 
-1. 先克隆/下载下来。
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.5.
 
-2. 直接npm install。
+## Development server
 
-3. ne serve 跑起来即可。
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-4. 其中用到的属性有不懂的可以跳转：https://www.primefaces.org/primeng/#/datatable 
+## Code scaffolding
 
-    + 4.1 比如遇到一个元素上有 sortField="str" 不知道什么意思，只要进入以上链接，ctrl + f  sortField 即可  
-      
-      
-    + 4.2 如果右键翻译有些不是很妥，请前往 https://github.com/wangraoji/clonePrimengVersion 把它克隆/下载下来，  
-    然后npm install ng serve 跑起来，翻译不妥的地方以中文注解！  
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-5. 科普一下 &lt;custom data="data"&gt;&lt;custom;/&gt; 和 &lt;custom [data]="data" &gt;&lt;custom/&gt;  的区别  
-  
-    + 5.1   前者表示在里面传入了1个'data'的字符串，后者表示在Ts里面有这个data的东西传进去。比如 data: [1,2,3];
+## Build
 
-6. primeNG Table控件支持自定义，所以主要配置在 HTML 文件里，https://github.com/wangraoji/primeNgAndfirstTable/blob/master/src/app/components/01-basic/basic.component.html  
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
+## Running unit tests
 
-    ts主要实现逻辑。    
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## Running end-to-end tests
 
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Further help
 
-
-
-
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

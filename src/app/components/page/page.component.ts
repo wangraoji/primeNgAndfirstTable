@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 
 import { CarService } from '../carService';
 @Component({
-    selector: 'basic-example',
-    templateUrl: './basic.component.html',
-    styleUrls: ['./basic.component.scss'],
+    selector: 'page-example',
+    templateUrl: './page.component.html',
+    styleUrls: ['./page.component.scss'],
 })
-export class BasicComponent {
+export class PageComponent {
 
 
     // 列头数据
